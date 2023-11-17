@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'widgets/home_page_body.dart';
+import 'widgets/home_view_body.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
