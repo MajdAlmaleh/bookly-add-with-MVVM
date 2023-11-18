@@ -3,7 +3,6 @@ import 'package:bookly/features/home/presentation/views/widgets/custom_app_bar.d
 import 'package:flutter/material.dart';
 
 import 'best_seller_list_view.dart';
-import 'best_seller_list_view_item.dart';
 import 'custom_books_list_view.dart';
 
 class HomePageBody extends StatelessWidget {
