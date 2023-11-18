@@ -7,15 +7,15 @@ import 'package:go_router/go_router.dart';
 
 import 'book_rating.dart';
 
-class BestSellerListViewItem extends StatelessWidget {
-  const BestSellerListViewItem({
+class BookListViewItem extends StatelessWidget {
+  const BookListViewItem({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         GoRouter.of(context).push(AppRouter.kBookDetailsView);
       },
       child: SizedBox(
@@ -42,9 +42,10 @@ class BestSellerListViewItem extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width * .5,
-                    child:  Text(
+                    child: Text(
                       'Harry Potter and the Goblet of Fire',
-                      style: Styles.textStyle20.copyWith(fontFamily: kGtSectraFine),
+                      style: Styles.textStyle20
+                          .copyWith(fontFamily: kGtSectraFine),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -52,7 +53,7 @@ class BestSellerListViewItem extends StatelessWidget {
                   const SizedBox(
                     height: 3,
                   ),
-                   const Text(
+                  const Text(
                     'J.K. Rowling',
                     style: Styles.textStyle14,
                   ),
@@ -66,13 +67,8 @@ class BestSellerListViewItem extends StatelessWidget {
                         style: Styles.textStyle20
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
-            
-            const Spacer(),
-            
-        const  BookRating()
-            
-            
-            
+                      const Spacer(),
+                      const BookRating()
                     ],
                   )
                 ],
