@@ -14,7 +14,7 @@ class HomePageBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return const CustomScrollView(
       slivers: [
-         SliverToBoxAdapter(
+        SliverToBoxAdapter(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -33,12 +33,12 @@ class HomePageBody extends StatelessWidget {
             ],
           ),
         ),
-        SliverFillRemaining(child: Padding(
+        SliverFillRemaining(
+            child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 30),
           child: BestSellerListView(),
         )),
       ],
     );
-
   }
 }
