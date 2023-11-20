@@ -1,10 +1,11 @@
+import 'package:bookly/core/utils/app_router.dart';
 import 'package:bookly/core/widgets/custom_error.dart';
 import 'package:bookly/core/widgets/custom_loading.dart';
-import 'package:bookly/features/home/data/models/book_model/image_links.dart';
 import 'package:bookly/features/home/presentation/manager/featured_books_cubit/featured_books_cubit.dart';
 import 'package:bookly/features/home/presentation/views/widgets/custom_book_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class FeaturedBooksListView extends StatelessWidget {
   const FeaturedBooksListView({
@@ -32,11 +33,17 @@ class FeaturedBooksListView extends StatelessWidget {
               //  ImageLinks? s=state.books[index].volumeInfo.imageLinks;
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: CustomBookImage(
-                    imageUrl:
-                        state.books[index].volumeInfo.imageLinks!.thumbnail
-                    // s==null?'https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.computerhope.com%2Fjargon%2Fe%2Ferror.png&tbnid=jaSzOJAVAROumM&vet=12ahUKEwj92O3ulNKCAxXbdXAKHSE2AOAQMygDegQIARB6..i&imgrefurl=https%3A%2F%2Fwww.computerhope.com%2Fjargon%2Fe%2Ferror.htm&docid=Z0ChwtQ5SLVbDM&w=350&h=329&q=error&client=opera&ved=2ahUKEwj92O3ulNKCAxXbdXAKHSE2AOAQMygDegQIARB6':s.thumbnail
-                    ),
+                child: GestureDetector(
+                  onTap: (){
+                    GoRouter.of(context).push(AppRouter.kBookDetailsView, extra: state.books[index]);
+                     
+                  },
+                  child: CustomBookImage(
+                      imageUrl:
+                          state.books[index].volumeInfo.imageLinks!.thumbnail
+                      // s==null?'https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.computerhope.com%2Fjargon%2Fe%2Ferror.png&tbnid=jaSzOJAVAROumM&vet=12ahUKEwj92O3ulNKCAxXbdXAKHSE2AOAQMygDegQIARB6..i&imgrefurl=https%3A%2F%2Fwww.computerhope.com%2Fjargon%2Fe%2Ferror.htm&docid=Z0ChwtQ5SLVbDM&w=350&h=329&q=error&client=opera&ved=2ahUKEwj92O3ulNKCAxXbdXAKHSE2AOAQMygDegQIARB6':s.thumbnail
+                      ),
+                ),
               );
             },
           ),

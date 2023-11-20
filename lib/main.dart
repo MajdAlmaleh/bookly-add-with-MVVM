@@ -26,6 +26,7 @@ class Bookly extends StatelessWidget {
           )..fetchFeaturedBooks(),
         ),
         BlocProvider(
+          
           create: (context) => NewestBooksCubit(
             getIt<HomeRepoImpl>(),
           )..fetchNewestBooks(),

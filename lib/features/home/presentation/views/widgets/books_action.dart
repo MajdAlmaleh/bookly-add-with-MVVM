@@ -26,7 +26,7 @@ class BooksAction extends StatelessWidget {
               child: CustomTextButton(
             onPressed: () {},
             fontSize: 16,
-            text: '19.99',
+            text: 'Book Preview',
             backgroundColor: const Color(0xffEF8262),
             textColor: Colors.white,
             borderRadius: const BorderRadius.only(

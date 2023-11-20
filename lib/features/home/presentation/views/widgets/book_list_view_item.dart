@@ -1,6 +1,5 @@
 import 'package:bookly/constants.dart';
 import 'package:bookly/core/utils/app_router.dart';
-import 'package:bookly/core/utils/assets.dart';
 import 'package:bookly/core/utils/styles.dart';
 import 'package:bookly/features/home/data/models/book_model/book_model.dart';
 import 'package:bookly/features/home/presentation/views/widgets/custom_book_image.dart';
@@ -12,20 +11,21 @@ import 'book_rating.dart';
 class BookListViewItem extends StatelessWidget {
   const BookListViewItem({
     super.key,
-    required this.book,
+    required this.bookModel,
   });
-  final BookModel book;
+  final BookModel bookModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push(AppRouter.kBookDetailsView);
+        GoRouter.of(context).push(AppRouter.kBookDetailsView, extra: bookModel);
       },
       child: SizedBox(
         height: 125,
         child: Row(
           children: [
-            CustomBookImage(imageUrl: book.volumeInfo.imageLinks!.thumbnail),
+            CustomBookImage(
+                imageUrl: bookModel.volumeInfo.imageLinks!.thumbnail),
             const SizedBox(
               width: 30,
             ),
@@ -36,7 +36,7 @@ class BookListViewItem extends StatelessWidget {
                   SizedBox(
                     width: MediaQuery.of(context).size.width * .5,
                     child: Text(
-                      book.volumeInfo.title!,
+                      bookModel.volumeInfo.title!,
                       style: Styles.textStyle20
                           .copyWith(fontFamily: kGtSectraFine),
                       maxLines: 2,
@@ -47,7 +47,7 @@ class BookListViewItem extends StatelessWidget {
                     height: 3,
                   ),
                   Text(
-                    book.volumeInfo.authors![0],
+                    bookModel.volumeInfo.authors![0],
                     style: Styles.textStyle14,
                   ),
                   const SizedBox(
@@ -60,16 +60,10 @@ class BookListViewItem extends StatelessWidget {
                         style: Styles.textStyle20
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
-                    /*   ElevatedButton(onPressed: (){},
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.grey),
-                      ), 
-                      child: Text('')
-                      ), */
                       const Spacer(),
                       BookRating(
-                        rating: book.volumeInfo.averageRating ?? 0,
-                        ratingCount: book.volumeInfo.ratingsCount ?? 0,
+                        rating: bookModel.volumeInfo.averageRating ?? 0,
+                        ratingCount: bookModel.volumeInfo.ratingsCount ?? 0,
                       )
                     ],
                   )

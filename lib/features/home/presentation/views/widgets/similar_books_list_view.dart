@@ -1,5 +1,11 @@
+import 'package:bookly/core/utils/app_router.dart';
+import 'package:bookly/core/widgets/custom_error.dart';
+import 'package:bookly/core/widgets/custom_loading.dart';
+import 'package:bookly/features/home/presentation/manager/similar_books_cubit/similar_books_cubit.dart';
 import 'package:bookly/features/home/presentation/views/widgets/custom_book_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class SimilarBooksListView extends StatelessWidget {
   const SimilarBooksListView({
@@ -8,21 +14,32 @@ class SimilarBooksListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * .15,
-      child: ListView.builder(
-      
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            child: CustomBookImage(
-              imageUrl: 
-              'https://www.google.com/imgres?imgurl=https%3A%2F%2Ftypographica.org%2Fwp-content%2Fuploads%2F2015%2F03%2FSectra-sample-6-315x315.png&tbnid=1fKiNkXBQoBxhM&vet=12ahUKEwj4r6Hi49GCAxWSGxAIHaGgBJkQMygWegQIARB7..i&imgrefurl=https%3A%2F%2Ftypographica.org%2Ftypeface-reviews%2Fgt-sectra%2F&docid=ZjQF7Tqc2-GDpM&w=315&h=315&q=gt%20sectra%20fine%20regular%20font%20free%20download&client=opera&ved=2ahUKEwj4r6Hi49GCAxWSGxAIHaGgBJkQMygWegQIARB7'
+    return BlocBuilder<SimilarBooksCubit, SimilarBooksState>(
+      builder: (context, state) {
+        if (state is SimilarBooksSuccess) {
+          return SizedBox(
+            height: MediaQuery.of(context).size.height * .15,
+            child: ListView.builder(
+              itemCount: state.books.length,
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: CustomBookImage(
+                      imageUrl: state.books[index].volumeInfo.imageLinks
+                              ?.thumbnail ??
+                          '',
+                    ));
+              },
             ),
           );
-        },
-      ),
+        } else if (state is SimilarBooksFailure) {
+          return CustomError(errMessage: state.errMessage);
+        } else {
+          return const CustomLoading();
+        }
+      },
     );
   }
 }
